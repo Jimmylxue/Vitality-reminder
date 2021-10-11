@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 const {
   appID,
   AppSecret,
@@ -6,9 +6,9 @@ const {
   birthday_templateId,
   pay_templateId,
   love_templateId,
-} = require('./config').wechat;
-const { weather } = require('./config').polymerization;
-const { getDay, getLoveDay, getBirthday, getPayDay, base } = require('./fnc');
+} = require("./config").wechat;
+const { weather, city } = require("./config").polymerization;
+const { getDay, getLoveDay, getBirthday, getPayDay, base } = require("./fnc");
 
 async function getToken() {
   let res = await axios.get(
@@ -17,17 +17,17 @@ async function getToken() {
   if (res.data && res.data.access_token) {
     return res.data.access_token;
   } else {
-    return 'none';
+    return "none";
   }
 }
 
 async function getWeather() {
   let res = await axios.get(
     `http://apis.juhe.cn/simpleWeather/query?city=${encodeURI(
-      '政和'
+      city
     )}&key=${weather}`
   );
-     console.log('res',res)
+  console.log("res", res);
   if (res && res.data && res.data.error_code == 0) {
     return res.data.result;
   }
@@ -42,9 +42,9 @@ async function getTemplate(ACCESS_TOKEN, weather) {
   const realtime = weather.realtime || {};
   const { flag } = base;
   const template = {
-    touser: 'o6tBC6MUgDu0DRJXjEZq_2BYdC8U',
+    touser: "o6tBC6MUgDu0DRJXjEZq_2BYdC8U",
     template_id: base_templateId,
-    topcolor: '#FF0000',
+    topcolor: "#FF0000",
     data: {},
   };
 
@@ -52,42 +52,41 @@ async function getTemplate(ACCESS_TOKEN, weather) {
   const base_temp = {
     dateTime: {
       value: day,
-      color: '#cc33cc',
+      color: "#cc33cc",
     },
     love: {
       value: loveDay,
-      color: '#ff3399',
+      color: "#ff3399",
     },
     pay: {
       value: payDay,
-      color: '#66ff00',
+      color: "#66ff00",
     },
     birthday: {
       value: birthday,
-      color: '#ff0033',
+      color: "#ff0033",
     },
     weather: {
       value: realtime.info,
-      color: '#33ff33',
+      color: "#33ff33",
     },
     temp: {
       value: realtime.temperature,
-      color: '#0066ff',
+      color: "#0066ff",
     },
     humidity: {
       value: realtime.humidity,
-      color: '#ff0033',
+      color: "#ff0033",
     },
     wind: {
       value: realtime.direct + realtime.power,
-      color: '#3399ff',
+      color: "#3399ff",
     },
     message: {
-      value: '陪你翻山越岭，追着日落看星星',
-      color: '#8C8C8C',
+      value: "陪你翻山越岭，追着日落看星星",
+      color: "#8C8C8C",
     },
   };
-
 
   template.data = base_temp;
   template.template_id = base_templateId;
@@ -103,20 +102,20 @@ async function getImportantTemplate(ACCESS_TOKEN, weather) {
   const day = getDay(); // 当前日期
   const { individual, anniversary, flag } = base;
   const template = {
-    touser: 'o6tBC6D_8VMCPtAxrU5Ve_Yd43JY',
+    touser: "o6tBC6D_8VMCPtAxrU5Ve_Yd43JY",
     template_id: base_templateId,
-    topcolor: '#FF0000',
+    topcolor: "#FF0000",
     data: {},
   };
 
   const birth_temp = {
     dateTime: {
       value: day,
-      color: '#cc33cc',
+      color: "#cc33cc",
     },
     individual: {
       value: individual,
-      color: '#0066ff',
+      color: "#0066ff",
     },
   };
 
@@ -124,7 +123,7 @@ async function getImportantTemplate(ACCESS_TOKEN, weather) {
   const pay_temp = {
     dateTime: {
       value: day,
-      color: '#cc33cc',
+      color: "#cc33cc",
     },
   };
 
@@ -132,11 +131,11 @@ async function getImportantTemplate(ACCESS_TOKEN, weather) {
   const love_temp = {
     dateTime: {
       value: day,
-      color: '#cc33cc',
+      color: "#cc33cc",
     },
     anniversary: {
       value: anniversary,
-      color: '#0066ff',
+      color: "#0066ff",
     },
   };
 

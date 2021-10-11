@@ -1,11 +1,10 @@
 const moment = require("moment");
 
 const base = {
-  birthday: "1998-10-11",
-  love: "2017-11-07",
+  birthday: "1998-10-11", // 女友出生日期
+  love: "2017-11-07", // 在一起的日期
   today: moment().format("YYYY-MM-DD"),
-  //   today: '2021-11-07',
-  pay: "05", // 发薪日
+  pay: "05", // 发薪日 -- 每月五号
   year: new Date().getFullYear(),
   month: new Date().getMonth() + 1,
   day: new Date().getDate(),
