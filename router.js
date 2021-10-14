@@ -28,16 +28,18 @@ router.get("/important", async (ctx) => {
   if (flag == 0) {
     // 普通日子 直接返回
     return;
-  }
-  try {
-    let ACCESS_TOKEN = await getToken();
-    if (ACCESS_TOKEN) {
-      let res = await getImportantTemplate(ACCESS_TOKEN);
-      console.log("重要日子返回", res);
+  }else{
+    try {
+      let ACCESS_TOKEN = await getToken();
+      if (ACCESS_TOKEN) {
+        let res = await getImportantTemplate(ACCESS_TOKEN);
+        console.log("重要日子返回", res);
+      }
+    } catch (error) {
+      console.log("重要日子错误", error.message);
     }
-  } catch (error) {
-    console.log("重要日子错误", error.message);
   }
+  
 });
 
 module.exports = router.routes();
