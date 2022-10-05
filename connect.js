@@ -18,7 +18,7 @@ app.use(async (ctx, next) => {
 	if (sha == signature) {
 		ctx.body = echostr
 	} else {
-		ctx.body = 'wrong'
+		ctx.body = 'wx-connect-error'
 	}
 })
 const server = require('http').Server(app.callback())
