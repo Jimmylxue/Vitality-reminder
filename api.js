@@ -86,7 +86,8 @@ async function getTemplate(ACCESS_TOKEN, weather) {
 		message: {},
 	}
 
-	base_temp.message = Math.floor(Math.random() * love_message.length)
+	base_temp.message =
+		love_message[Math.floor(Math.random() * love_message.length)]
 
 	template.data = base_temp
 	template.template_id = base_templateId
